@@ -1,5 +1,5 @@
 
-import { GreetingMessage } from "../types";
+import { GreetingMessage } from "../types.ts";
 
 const GREETINGS_LIBRARY: GreetingMessage[] = [
   {
@@ -55,10 +55,7 @@ const GREETINGS_LIBRARY: GreetingMessage[] = [
 ];
 
 export const generateChristmasGreeting = async (recipient: string): Promise<GreetingMessage> => {
-  // 模拟网络延迟，增加仪式感
   await new Promise(resolve => setTimeout(resolve, 800));
-  
-  // 随机选择一个祝福
   const randomIndex = Math.floor(Math.random() * GREETINGS_LIBRARY.length);
   return GREETINGS_LIBRARY[randomIndex];
 };

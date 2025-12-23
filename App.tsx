@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { generateChristmasGreeting } from './services/geminiService';
-import { GreetingMessage, CardState } from './types';
-import Snowfall from './components/Snowfall';
-import ChristmasTree from './components/ChristmasTree';
+import { generateChristmasGreeting } from './services/geminiService.ts';
+import { GreetingMessage, CardState } from './types.ts';
+import Snowfall from './components/Snowfall.tsx';
+import ChristmasTree from './components/ChristmasTree.tsx';
 
 const App: React.FC = () => {
   const [cardState, setCardState] = useState<CardState>(CardState.CLOSED);
@@ -40,7 +40,6 @@ const App: React.FC = () => {
     <div className="min-h-screen w-full relative overflow-hidden flex items-center justify-center p-4 bg-gradient-to-b from-[#050b14] via-[#0a1a2f] to-[#1a3a5f]">
       <Snowfall />
 
-      {/* Background Decor */}
       <div className="absolute bottom-0 left-0 p-8 opacity-30">
         <ChristmasTree />
       </div>
@@ -48,14 +47,12 @@ const App: React.FC = () => {
         <ChristmasTree />
       </div>
 
-      {/* Year Badge */}
       <div className="absolute top-10 left-10 z-20">
         <div className="px-4 py-1 bg-white/5 backdrop-blur-sm border border-white/20 rounded-full">
           <span className="text-white/60 font-serif tracking-widest text-sm italic">2025 Winter Collection</span>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 w-full max-w-lg">
         {cardState === CardState.CLOSED ? (
           <div className="flex flex-col items-center space-y-8 animate-in fade-in zoom-in duration-700">
@@ -82,7 +79,6 @@ const App: React.FC = () => {
         ) : (
           <div className={`transition-all duration-1000 ease-out transform ${cardState === CardState.OPENING ? 'scale-75 rotate-3 opacity-0' : 'scale-100 rotate-0 opacity-100'}`}>
             <div className="bg-[#fffdf5] rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] p-8 md:p-12 relative border-[10px] border-double border-red-900/90 min-h-[520px] flex flex-col">
-              {/* Card Decoration Icons */}
               <div className="absolute top-4 left-4 text-red-800 text-2xl opacity-40">🔔</div>
               <div className="absolute top-4 right-4 text-red-800 text-2xl opacity-40">🕯️</div>
               <div className="absolute bottom-4 left-4 text-red-800 text-2xl opacity-40">🍭</div>
@@ -125,7 +121,6 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="mt-10 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <button 
                   onClick={fetchGreeting}
@@ -142,7 +137,6 @@ const App: React.FC = () => {
                 </button>
               </div>
 
-              {/* Decorative Element */}
               <div className="absolute -bottom-4 -left-8 transform -rotate-12 hidden md:block select-none pointer-events-none">
                 <span className="text-7xl opacity-10 blur-[1px]">🎁</span>
               </div>
@@ -151,7 +145,6 @@ const App: React.FC = () => {
         )}
       </div>
 
-      {/* Audio Control */}
       <div className="fixed bottom-10 right-10 z-50">
         <button 
           onClick={() => setBgMusicPlaying(!bgMusicPlaying)}
@@ -161,22 +154,7 @@ const App: React.FC = () => {
             {bgMusicPlaying ? '✨' : '🔇'}
           </span>
         </button>
-        {bgMusicPlaying && (
-            <div className="absolute -top-10 right-0 w-32">
-                <p className="text-white text-[10px] text-right font-serif tracking-[0.2em] opacity-60 animate-pulse italic uppercase">2025 Holiday Vibes</p>
-            </div>
-        )}
       </div>
-
-      <style>{`
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .font-festive {
-            font-family: 'Ma Shan Zheng', cursive;
-        }
-      `}</style>
     </div>
   );
 };
